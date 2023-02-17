@@ -7,8 +7,7 @@ export default function Image({ id }: { id: number }) {
   const { ref } = useFlip({ flipKey: id });
 
   return (
-    <main style={{ padding: "100px", display: "grid", placeItems: "center" }}>
-      <Link href="/">Home</Link>
+    <main style={{ padding: "100px", display: "grid", gridTemplateColumns: "1fr 1fr" }}>
       <img
         ref={ref}
         src={`/images/${id}.jpg`}
@@ -20,6 +19,36 @@ export default function Image({ id }: { id: number }) {
           objectFit: "cover",
         }}
       />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "50px",
+          maxWidth: "60ch",
+          animationName: "slidein",
+          animationDuration: "250ms",
+          animationDelay: "250ms",
+          animationFillMode: "forwards",
+          opacity: 0,
+        }}
+      >
+        <h1>Lorem Ipsum Dolor</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi, enim illo
+          modi cum asperiores neque sit tempore, molestiae inventore iusto atque sequi laudantium
+          velit reprehenderit doloribus voluptates hic ad!
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi, enim illo
+          modi cum asperiores neque sit tempore, molestiae inventore iusto atque sequi laudantium
+          velit reprehenderit doloribus voluptates hic ad!
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, eligendi, enim illo
+          modi cum asperiores neque sit tempore, molestiae inventore iusto atque sequi laudantium
+          velit reprehenderit doloribus voluptates hic ad!
+        </p>
+      </div>
     </main>
   );
 }
