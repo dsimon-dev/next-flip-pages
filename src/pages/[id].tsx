@@ -1,19 +1,19 @@
+import { slideInAppearStyles } from "@/animations";
 import { useFlip } from "@/flip";
 import { imageIds } from "@/images";
 import { GetStaticPaths, GetStaticProps } from "next";
-import Link from "next/link";
 
 export default function Image({ id }: { id: number }) {
   const { ref } = useFlip({ flipKey: id });
 
   return (
-    <main style={{ padding: "100px", display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+    <main style={{ padding: "5vw", display: "flex", flexWrap: "wrap", gap: "5vw" }}>
       <img
         ref={ref}
         src={`/images/${id}.jpg`}
         style={{
           display: "block",
-          width: "40vw",
+          width: "min(100%, 800px)",
           height: "auto",
           aspectRatio: "1 / 1",
           objectFit: "cover",
@@ -21,15 +21,11 @@ export default function Image({ id }: { id: number }) {
       />
       <div
         style={{
+          ...slideInAppearStyles,
           display: "flex",
           flexDirection: "column",
           gap: "50px",
           maxWidth: "60ch",
-          animationName: "slidein",
-          animationDuration: "250ms",
-          animationDelay: "250ms",
-          animationFillMode: "forwards",
-          opacity: 0,
         }}
       >
         <h1>Lorem Ipsum Dolor</h1>
