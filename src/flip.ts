@@ -33,6 +33,7 @@ export function useFlip({
 }: FlipProps) {
   const element = useRef<HTMLElement>();
 
+  // Animate on mount
   const ref = (el: HTMLElement | null) => {
     if (el == null) return;
     element.current = el;
@@ -50,6 +51,7 @@ export function useFlip({
     });
   };
 
+  // Save box before unmount
   useBrowserLayoutEffect(() => {
     return () => {
       const el = element.current;
