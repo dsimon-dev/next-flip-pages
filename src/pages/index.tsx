@@ -1,7 +1,8 @@
+import { fadeInAppearStyles } from "@/animations";
 import { useFlip } from "@/flip";
 import { imageIds } from "@/images";
 import Link from "next/link";
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 
 export default function Home() {
   return (
@@ -23,22 +24,15 @@ export default function Home() {
 }
 
 function Item({ id }: { id: number }) {
-  const [opacity, setOpacity] = useState(0);
-  const [transition, setTransition] = useState<string>();
+  const [styles, setStyles] = useState<CSSProperties>(fadeInAppearStyles);
 
   const { ref } = useFlip({
     flipKey: id,
-    onAnimationStart: () => {
-      setOpacity(1);
-    },
-    onCancel: () => {
-      setOpacity(1);
-      setTransition("opacity 250ms ease 250ms");
-    },
+    onAnimationStart: () => setStyles({}),
   });
 
   return (
-    <Link href={`/${id}`} style={{ opacity, transition }}>
+    <Link href={`/${id}`} style={styles}>
       <img
         ref={ref}
         src={`/images/${id}.jpg`}
