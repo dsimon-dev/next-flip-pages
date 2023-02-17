@@ -7,7 +7,18 @@ import { CSSProperties, useState } from "react";
 export default function Home() {
   return (
     <main style={{ padding: "5vw" }}>
-      <h1 style={{ marginBottom: "50px" }}>Lorem Ipsum Dolor</h1>
+      <h1 style={{ marginBottom: "25px" }}>Dense Green Growth</h1>
+      <p style={{ marginBottom: "50px" }}>
+        Plant photos taken from the{" "}
+        <a
+          href="https://unsplash.com/collections/3333421/dense-green-growth"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Dense Green Growth
+        </a>{" "}
+        Unsplash collection.
+      </p>
       <div
         style={{
           display: "grid",
