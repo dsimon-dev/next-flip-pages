@@ -7,9 +7,9 @@ import { CSSProperties, useState } from "react";
 export default function Home() {
   return (
     <main style={{ padding: "5vw" }}>
-      <h1 style={{ marginBottom: "25px" }}>Dense Green Growth</h1>
+      <h1 style={{ marginBottom: "25px" }}>Next Flip Pages</h1>
       <p style={{ marginBottom: "50px" }}>
-        Plant photos taken from the{" "}
+        Photos taken from the{" "}
         <a
           href="https://unsplash.com/collections/3333421/dense-green-growth"
           target="_blank"
