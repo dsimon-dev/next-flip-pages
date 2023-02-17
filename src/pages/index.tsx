@@ -44,17 +44,7 @@ function Item({ id }: { id: number }) {
 
   return (
     <Link href={`/${id}`} style={styles}>
-      <img
-        ref={ref}
-        src={`/images/${id}.jpg`}
-        style={{
-          display: "block",
-          width: "100%",
-          height: "auto",
-          aspectRatio: "1 / 1",
-          objectFit: "cover",
-        }}
-      />
+      <img ref={ref} src={`/images/${id}.jpg`} />
     </Link>
   );
 }

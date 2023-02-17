@@ -8,17 +8,7 @@ export default function Image({ id }: { id: number }) {
 
   return (
     <main style={{ padding: "5vw", display: "flex", flexWrap: "wrap", gap: "5vw" }}>
-      <img
-        ref={ref}
-        src={`/images/${id}.jpg`}
-        style={{
-          display: "block",
-          width: "min(100%, 800px)",
-          height: "auto",
-          aspectRatio: "1 / 1",
-          objectFit: "cover",
-        }}
-      />
+      <img ref={ref} src={`/images/${id}.jpg`} style={{ width: "min(100%, 800px)" }} />
       <div
         style={{
           ...slideInAppearStyles,
