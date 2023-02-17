@@ -1,3 +1,4 @@
+import { isEqual } from "lodash";
 import { useRef } from "react";
 
 import { useBrowserLayoutEffect } from "./utils";
@@ -8,34 +9,62 @@ export type FlipProps = {
   flipKey: FlipKey;
   duration?: number;
   easing?: string;
+  onCancel?: () => void;
+  onAnimationStart?: () => void;
+  onAnimationEnd?: () => void;
 };
 
-const boxes = new Map<FlipKey, DOMRect>();
+type Box = {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+};
 
-export function useFlip({ flipKey, duration = 500, easing = "ease" }: FlipProps) {
+const boxes = new Map<FlipKey, Box>();
+
+export function useFlip({
+  flipKey,
+  duration = 250,
+  easing = "ease-in-out",
+  onCancel,
+  onAnimationStart,
+  onAnimationEnd,
+}: FlipProps) {
   const element = useRef<HTMLElement>();
 
   const ref = (el: HTMLElement | null) => {
     if (el == null) return;
     element.current = el;
     const oldBox = boxes.get(flipKey);
-    if (oldBox != null) {
-      boxes.delete(flipKey);
-      const newBox = el.getBoundingClientRect();
-      animate({ el, oldBox, newBox, duration, easing });
+    const newBox = getBox(el);
+    boxes.delete(flipKey);
+    if (oldBox == null || isEqual(oldBox, newBox)) {
+      onCancel?.();
+      return;
     }
+    onAnimationStart?.();
+    const animation = animate({ el, oldBox, newBox, duration, easing });
+    animation.finished.then(() => {
+      onAnimationEnd?.();
+    });
   };
 
   useBrowserLayoutEffect(() => {
     return () => {
       const el = element.current;
       if (el == null) return;
-      const box = el.getBoundingClientRect();
+      const box = getBox(el);
       boxes.set(flipKey, box);
     };
   }, [flipKey]);
 
   return { ref };
+}
+
+function getBox(el: HTMLElement): Box {
+  const { left, top, width, height } = el.getBoundingClientRect();
+  return { left, top, width, height };
 }
 
 function animate({
@@ -46,12 +75,12 @@ function animate({
   easing,
 }: {
   el: HTMLElement;
-  oldBox: DOMRect;
-  newBox: DOMRect;
+  oldBox: Box;
+  newBox: Box;
   duration: number;
   easing: string;
 }) {
-  el.animate(
+  return el.animate(
     [
       {
         transformOrigin: "0 0",
