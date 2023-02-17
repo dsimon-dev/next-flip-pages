@@ -10,7 +10,6 @@ export default function Image({ id }: { id: number }) {
           display: "block",
           width: "50vw",
           height: "80vh",
-          aspectRatio: "1 / 1",
           objectFit: "cover",
         }}
       />
