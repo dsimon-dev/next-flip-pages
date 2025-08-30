@@ -31,7 +31,7 @@ export function useFlip({
   onAnimationStart,
   onAnimationEnd,
 }: FlipProps) {
-  const element = useRef<HTMLElement>();
+  const element = useRef<HTMLElement>(null);
 
   // Animate on mount
   const ref = (el: HTMLElement | null) => {
